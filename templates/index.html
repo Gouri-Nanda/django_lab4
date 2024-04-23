@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Simple Interest Calculator</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    </head>
+    <body style="background-color: lavender;">
+        <div class="container" >
+            <h1>Simple Interest Calculator</h1>
+    
+            <form method="POST">
+                {% csrf_token %}  
+                <!-- must for django -->
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Calculate</button>
+            </form>
+    
+            <h2>Calculation History</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Principal</th>
+                        <th>Rate</th>
+                        <th>Time</th>
+                        <th>Interest</th>
+                        <th>Timestamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for calculation in calculations %}
+                    <tr>
+                        <td>{{ calculation.principal }}</td>
+                        <td>{{ calculation.rate }}%</td>
+                        <td>{{ calculation.time }}</td>
+                        <td>{{ calculation.result }}</td>
+                        <td>{{ calculation.timestamp }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+    </html>
